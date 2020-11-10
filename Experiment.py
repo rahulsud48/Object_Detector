@@ -1,24 +1,3 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.3.4
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
-# # <font style="color:blue">5. Experiment (Training)</font>
-
-# +
-# %matplotlib notebook
-# %load_ext autoreload
-# %autoreload 2
 
 import os
 import random
@@ -67,9 +46,6 @@ from trainer.data_set_downloader import DataSetDownloader
 from trainer.matplotlib_visualizer import MatplotlibVisualizer
 
 
-# -
-
-# ## <font style="color:green">5.1. Experiment Class</font>
 
 class Experiment:
     def __init__(
@@ -227,25 +203,6 @@ class Experiment:
         fig.show()
 
 
-# ## <font style="color:green">5.2. PennFudan Pedestrian Dataset</font>
-#
-# Let's choose what data we would like to train our detector on.
-#
-# Not to bore you with time-consuming training, let it be something small and nice.
-# We suggest [PennFudanPed](https://www.cis.upenn.edu/~jshi/ped_html) dataset.
-#
-# It consists of 170 images of people. The images were taken near the University of Pennsylvania, and Fudan University.
-# Here is one of the examples of the data that the dataset provides:
-#
-# ---
-#
-# <img src='https://www.learnopencv.com/wp-content/uploads/2020/03/c3-w8-PennPed00015_1.jpg' align='middle'>
-#
-# ---
-#
-# You can find some of the other details in the configuration file.
-
-# ## <font style="color:green">5.3. Run Experiment</font>
 
 if __name__ == '__main__':
     dataloader_config, trainer_config = patch_configs(epoch_num_to_set=100, batch_size_to_set=30)
@@ -288,11 +245,3 @@ if __name__ == '__main__':
     # how good our detector works by visualizing the results on the randomly chosen test images:
     experiment.draw_bboxes(4, 1, trainer_config)
 
-# You can see that, sometimes, predicted bounding boxes are not as tight or, on the opposite, not as wide as we wanted them to be.
-#
-# They can also be a little bit shifted from the ground-truth position or there can be one bounding box in the middle instead of two separated boxes for two people.
-#
-# All of the mentioned artifacts could be the result of:
-# - not enough epochs for training, so we are facing underfitting;
-# - not accurate choice of hyperparameters, so we are facing overfitting;
-# - not precise annotation, so that the network couldn't learn the exact location of the bounding boxes.
